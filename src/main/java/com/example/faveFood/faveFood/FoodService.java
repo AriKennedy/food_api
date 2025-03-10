@@ -21,6 +21,14 @@ public class FoodService {
         return foodRepositry.findAll();
     }
 
+    public Optional<Food> getFaveFoodByName(String name) {
+        Optional<Food> findFaveFood = foodRepositry.findByName(name);
+        if (findFaveFood.isEmpty()) {
+            throw new IllegalArgumentException("Name not found");
+        }
+        return foodRepositry.findByName(findFaveFood.get().getName());
+    }
+
     public void addNewFood(Food food) {
         Optional<Food> foodByName = foodRepositry.findByName(food.getName());
         if (foodByName.isPresent()) {

@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping(path = "api/v1/faveFood")
@@ -19,6 +20,11 @@ public class FoodController {
     @GetMapping
     public List<Food> getFaveFood() {
         return foodService.getFaveFood();
+    }
+
+    @GetMapping(path = "{name}")
+    public Optional<Food> getFaveFoodByName(@PathVariable String name) {
+        return foodService.getFaveFoodByName(name);
     }
 
     @PostMapping
